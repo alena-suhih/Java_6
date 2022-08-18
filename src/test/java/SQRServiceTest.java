@@ -1,15 +1,16 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.netology.sqr.lesson_6.sqr.SQRService;
 
 public class SQRServiceTest {
 
-    @Test
-    public void test () {
+    @ParameterizedTest
+    @CsvFileSource (files="src/test/resources/sqr.csv")
+    public void test (int expected, int lowerBound, int upperBound) {
         SQRService service = new SQRService();
 
-        int expected = 3;
-        int actual = service.calcSqrt(200, 300);
+        int actual = service.calcSqrt(lowerBound, upperBound);
         Assertions.assertEquals(expected, actual);
 
     }
